@@ -1,4 +1,5 @@
 use Test::More;
+use File::Slurp;
 use DBI;
 use PGObject;
 use PGObject::Type::ByteString;
@@ -31,8 +32,8 @@ SELECT \$1;
 
 # Test cases
 
-my $hexval = pack('C5', 0xCA, 0xFE, 0xBA, 0xBE, 0xd5);
-my $obj = PGObject::Type::ByteString->new($hexval);
+my $non_utf8 = read_file( 't/data/non-ascii-non-utf8', { binmode => ':raw' });
+my $obj = PGObject::Type::ByteString->new(non_utf8);
 my ($ref) = PGObject->call_procedure(
    funcname   => 'roundtrip',
    funcprefix => 'test__',

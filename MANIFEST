@@ -11,3 +11,4 @@ t/03-dbtests.t
 t/manifest.t
 xt/pod-coverage.t
 xt/pod.t
+t/data/non-ascii-non-utf8
