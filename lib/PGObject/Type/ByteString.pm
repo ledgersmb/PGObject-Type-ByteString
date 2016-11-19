@@ -93,7 +93,8 @@ Returns the date in YYYY-MM-DD format.
 
 sub to_db {
     my ($self) = @_;
-    return $self->{value};
+    # hashref with value and type allows us to tell DBD::Pg to bind to binary
+    return { value => $self->{value}, type => PG_BYTEA };
 }
 
 =head1 AUTHOR
