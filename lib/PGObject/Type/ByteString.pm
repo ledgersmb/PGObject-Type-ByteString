@@ -64,13 +64,14 @@ sub register {
 
 sub new {
     my ($class, $value) = @_;
-    my $self = {
-        value => $value
-    };
-
-    bless $self, $class;
-
-    return $self;
+    croak 'Must pass scalar or scalar ref' 
+        if defined ref $value and ref $value !~ /SCALAR/;
+    if (ref $value ) {
+       $self = $value;
+    } else {
+       $self = \$value;
+    }
+    return bless $self, $class;
 }
 
 
@@ -94,7 +95,7 @@ Returns the date in YYYY-MM-DD format.
 sub to_db {
     my ($self) = @_;
     # hashref with value and type allows us to tell DBD::Pg to bind to binary
-    return { value => $self->{value}, type => PG_BYTEA };
+    return { value => $self, type => PG_BYTEA };
 }
 
 =head1 AUTHOR
