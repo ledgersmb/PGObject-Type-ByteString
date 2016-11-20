@@ -64,6 +64,7 @@ sub register {
 
 sub new {
     my ($class, $value) = @_;
+    my $self;
     croak 'Must pass scalar or scalar ref' 
         if defined ref $value and ref $value !~ /SCALAR/;
     if (ref $value ) {
