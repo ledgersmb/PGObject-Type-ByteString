@@ -1,4 +1,7 @@
 Revision history for PGObject-Type-ByteString
 
+1.1.0   2016-11-20
+        Switch from hashref to scalarref, while we can
+
 1.0.0   2016-11-19
         First version.
