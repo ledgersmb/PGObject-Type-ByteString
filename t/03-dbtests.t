@@ -43,7 +43,7 @@ my ($ref) = PGObject->call_procedure(
 
 my ($val) = values %$ref;
 ok($val->isa('PGObject::Type::ByteString'), 'Roundtrip returns correct type');
-is($val->{value}, $obj->{value}, 'Roundtrip returns same value');
+is($$val, $$obj, 'Roundtrip returns same value');
 
 
 # DB Cleanup
