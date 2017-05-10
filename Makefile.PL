@@ -13,7 +13,7 @@ WriteMakefile(
       : ()),
     PL_FILES            => {},
     PREREQ_PM => {
-        'PGObject' => '1.3',
+        'PGObject' => '1.403.2',
         'DBD::Pg'  => '1.20',
     },
     BUILD_REQUIRES => {

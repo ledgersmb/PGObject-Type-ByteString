@@ -9,16 +9,15 @@ use DBD::Pg qw(:pg_types);
 
 =head1 NAME
 
-PGObject::Type::DateTime - DateTime Wrappers for PGObject
+PGObject::Type::ByteString - Wrapper for raw strings mapping to BYTEA columns
 
 =head1 VERSION
 
-Version 1.01.0
+Version 1.1.2
 
 =cut
 
-our $VERSION = '1.01.0';
-
+our $VERSION = '1.2.0';
 
 =head1 SYNOPSIS
 
