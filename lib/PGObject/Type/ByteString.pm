@@ -13,11 +13,11 @@ PGObject::Type::DateTime - DateTime Wrappers for PGObject
 
 =head1 VERSION
 
-Version 1.0.0
+Version 1.01.0
 
 =cut
 
-our $VERSION = '1.0.0';
+our $VERSION = '1.01.0';
 
 
 =head1 SYNOPSIS
@@ -48,10 +48,16 @@ sub register {
     my $types = $args{types};
     $types = [ DBD::Pg::PG_BYTEA, 'bytea' ] unless defined $types and @$types;
     for my $type (@$types){
-        my $ret =
-            PGObject->register_type(registry => $registry, pg_type => $type,
-                                  perl_class => $self);
-        return $ret unless $ret;
+        if ($PGObject::VERSION =~ /^1\./){
+            my $ret =
+                PGObject->register_type(registry => $registry, pg_type => $type,
+                                      perl_class => $self);
+            return $ret unless $ret;
+        } else {
+            PGObject::Type::Registry->register_type(
+                 registry => $registry, dbtype => $type, apptype => $self
+            );
+        }
     }
     return 1;
 }
