@@ -9,11 +9,11 @@ use DBD::Pg qw(:pg_types);
 
 =head1 NAME
 
-PGObject::Type::ByteString - Wrapper for raw strings mapping to BYTEA columns
+PGObject::Type::ByteString - Wrapper for raw strings mapping to BYTEA columns.
 
 =head1 VERSION
 
-Version 1.1.2
+Version 1.2.0
 
 =cut
 
@@ -28,12 +28,16 @@ Now all BYTEA columns will be returned as ByteString objects.
 =head1 DESCRIPTION
 
 This module provides a basic wrapper around Perl strings, mapping them to
+BYTEA database columns.
+
+PGObject::Type::ByteString objects have no traditional properties, however
+dereferencing them will yield the raw string they contain.
 
 =head1 SUBROUTINES/METHODS
 
-=head2 register
+=head2 register([registry => 'default',] [types => $types_arrayref])
 
-By default registers PG_BYTEA
+By default registers type PG_BYTEA.
 
 =cut
 
@@ -64,6 +68,10 @@ sub register {
 
 =head2 new
 
+Instantiates and returns a new object, based on the supplied scalar string,
+or scalar string reference.
+
+Dereferencing the returned object will yield the original raw string.
 
 =cut
 
@@ -83,7 +91,8 @@ sub new {
 
 =head2 from_db
 
-Parses a date from YYYY-MM-DD format and generates the new object based on it.
+Returns a new PGObject::Type::ByteString object based on the supplied
+scalar string, or scalar string reference.
 
 =cut
 
@@ -94,7 +103,8 @@ sub from_db {
 
 =head2 to_db
 
-Returns the date in YYYY-MM-DD format.
+Returns the object's binary string value packaged as PG_BYTEA type/value
+hashref suitable for passing to DBD::Pg.
 
 =cut
 
@@ -114,8 +124,6 @@ Please report any bugs or feature requests to
 C<bug-pgobject-type-bytestring at rt.cpan.org>, or through
 the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=PGObject-Type-ByteString>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
-
-
 
 
 =head1 SUPPORT
