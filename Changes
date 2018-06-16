@@ -1,5 +1,8 @@
 Revision history for PGObject-Type-ByteString
 
+1.2.2   2018-06-16
+        Restore support for undefined values
+
 1.2.1   2018-06-16
         Address warning thrown by LedgerSMB tests
 
