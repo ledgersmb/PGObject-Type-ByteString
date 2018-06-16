@@ -3,9 +3,10 @@ package PGObject::Type::ByteString;
 use strict;
 use warnings;
 
-use 5.008;
+use 5.010;
 use Carp;
 use DBD::Pg qw(:pg_types);
+use Ref::Util qw(is_ref is_scalarref);
 
 =head1 NAME
 
@@ -13,11 +14,11 @@ PGObject::Type::ByteString - Wrapper for raw strings mapping to BYTEA columns.
 
 =head1 VERSION
 
-Version 1.2.0
+Version 1.2.1
 
 =cut
 
-our $VERSION = '1.2.0';
+our $VERSION = '1.2.1';
 
 =head1 SYNOPSIS
 
@@ -78,9 +79,9 @@ Dereferencing the returned object will yield the original raw string.
 sub new {
     my ($class, $value) = @_;
     my $self;
-    croak 'Must pass scalar or scalar ref' 
-        if defined ref $value and ref $value !~ /SCALAR/;
-    if (ref $value ) {
+    croak 'Must pass scalar or scalar ref'
+        if defined $value and is_scalarref($value);
+    if (is_ref($value)) {
        $self = $value;
     } else {
        $self = \$value;
@@ -161,7 +162,7 @@ L<http://search.cpan.org/dist/PGObject-Type-ByteString/>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2016 Erik Huelsmann
+Copyright 2016-2018 Erik Huelsmann
 
 This program is released under the following license: BSD
 
