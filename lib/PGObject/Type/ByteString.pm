@@ -14,11 +14,11 @@ PGObject::Type::ByteString - Wrapper for raw strings mapping to BYTEA columns.
 
 =head1 VERSION
 
-Version 1.2.2
+Version 1.2.3
 
 =cut
 
-our $VERSION = '1.2.2';
+our $VERSION = '1.2.3';
 
 =head1 SYNOPSIS
 
@@ -80,7 +80,7 @@ sub new {
     my ($class, $value) = @_;
     my $self;
     croak 'Must pass scalar or scalar ref'
-        if is_scalarref($value);
+        if is_ref($value) && ! is_scalarref($value);
     if (is_ref($value)) {
        $self = $value;
     } else {

@@ -1,5 +1,8 @@
 Revision history for PGObject-Type-ByteString
 
+1.2.3   2018-06-16
+        Correct inversed condition after fixes
+
 1.2.2   2018-06-16
         Restore support for undefined values
 
